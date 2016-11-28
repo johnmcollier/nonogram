@@ -14,3 +14,4 @@ def getProblem1():
     row = [[1,1], [3], [1,1]]
     col = [[3], [1], [3]]
     return row, col
+

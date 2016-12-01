@@ -1,9 +1,87 @@
 
 def getProblem(problem_num):
     if(problem_num == 0):
-        return getProblem0
+        return getProblem0()
     if(problem_num == 1):
-        return getProblem1
+        return getProblem1()
+    if(problem_num == 2):
+        return getProblem2()
+    if(problem_num == 3):
+        return getProblem3()
+    if(problem_num == 4):
+        return getProblem4()
+    if(problem_num == 5):
+        return getProblem5()
+    if(problem_num == 6):
+        return getProblem6()
+    if(problem_num == 7):
+        return getProblem7()
+    if(problem_num == 8):
+        return getProblem8()
+    if(problem_num == 9):
+        return getProblem9()
+    if(problem_num == 10):
+        return getProblem10()
+    if(problem_num == 11):
+        return getProblem11()
+    if(problem_num == 12):
+        return getProblem12()
+    if(problem_num == 13):
+        return getProblem13()
+    if(problem_num == 14):
+        return getProblem14()
+    if(problem_num == 15):
+        return getProblem15()
+    if(problem_num == 16):
+        return getProblem16()
+    if(problem_num == 17):
+        return getProblem17()
+    if(problem_num == 18):
+        return getProblem18()
+    if(problem_num == 19):
+        return getProblem19()
+    if(problem_num == 20):
+        return getProblem20()
+    if(problem_num == 21):
+        return getProblem21()
+    if(problem_num == 22):
+        return getProblem22()
+    if(problem_num == 23):
+        return getProblem23()
+    if(problem_num == 24):
+        return getProblem24()
+    if(problem_num == 25):
+        return getProblem25()
+    if(problem_num == 26):
+        return getProblem26()
+    if(problem_num == 27):
+        return getProblem27()
+    if(problem_num == 28):
+        return getProblem28()
+    if(problem_num == 29):
+        return getProblem29()
+    if(problem_num == 30):
+        return getProblem30()
+    if(problem_num == 31):
+        return getProblem31()
+    if(problem_num == 32):
+        return getProblem32()
+    if(problem_num == 33):
+        return getProblem33()
+    if(problem_num == 34):
+        return getProblem34()
+    if(problem_num == 35):
+        return getProblem35()
+    if(problem_num == 36):
+        return getProblem36()
+    if(problem_num == 37):
+        return getProblem37()
+    if(problem_num == 38):
+        return getProblem38()
+    if(problem_num == 39):
+        return getProblem39()
+    if(problem_num == 40):
+        return getProblem40()
 
 def getProblem0():
     row = [[1], [3], [1]]

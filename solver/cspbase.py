@@ -495,6 +495,7 @@ class BT:
 
         print("bt_search finished")
         self.print_stats()
+        return status
 
     def bt_recurse(self, propagator, var_ord, val_ord, level):
         '''Return true if found solution. False if still need to search.

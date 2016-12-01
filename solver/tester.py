@@ -9,7 +9,7 @@ import nonogram_csp
 import argparse
 from problems import *
 
-NUM_TESTS = 2
+NUM_TESTS = 41
 PROBLEM = -1
 
 def main():
@@ -53,13 +53,13 @@ def run_test(test_id, model, value_ordering, variable_ordering):
     
     csp, var_array = model(row, col)
     solver = BT(csp)
-    #solver.bt_search(prop_BT, variable_ordering, value_ordering)
-
-    #if check_solution(var_array):
-    #    succ = True
+    succ = solver.bt_search(prop_BT, variable_ordering, value_ordering)
 
     time_taken = (time.time() - start)
     return succ, time_taken
+
+def check_solution(var_array, row, col):
+
 
 def parse_args():
     global PROBLEM

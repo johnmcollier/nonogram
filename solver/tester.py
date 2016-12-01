@@ -23,7 +23,7 @@ def main():
     if (PROBLEM == -1):
         for test_id in range(NUM_TESTS):
             print("--- Running Test " +str(test_id)+ " ---")
-            succ, time_taken = run_test(test_id, nonogram_csp.nonogram_csp_model, BT, orderings.val_lcv, orderings.ord_dh)
+            succ, time_taken = run_test(test_id, nonogram_csp.nonogram_csp_model, orderings.val_lcv, orderings.ord_dh)
             total_time += time_taken
             
             succ_str = "Failed"
@@ -45,14 +45,14 @@ def main():
 
     print("\nFinal results: " + str(total_correct) + "/" + str(NUM_TESTS) + " solved in " + str(total_time) + " seconds")
 
-def run_test(test_id, model, search_algo, value_ordering, variable_ordering):
+def run_test(test_id, model, value_ordering, variable_ordering):
     row, col = getProblem(test_id)
 
     start = time.time()
     succ = False
     
     csp, var_array = model(row, col)
-    solver = search_algo(csp)
+    solver = BT(csp)
     succ = solver.bt_search(prop_BT, variable_ordering, value_ordering)
 
     time_taken = (time.time() - start)

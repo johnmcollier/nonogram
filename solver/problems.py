@@ -83,6 +83,8 @@ def getProblem(problem_num):
     if(problem_num == 40):
         return getProblem40()
 
+    print("Invalid problem number provided in getProblem() !!!!!")
+
 def getProblem0():
     row = [[1], [3], [1]]
     col = [[1], [3], [1]]

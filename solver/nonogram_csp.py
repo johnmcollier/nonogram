@@ -65,10 +65,12 @@ def nonogram_csp_model(nonogram_rows, nonogram_columns):
 
 
 def get_valid_nary_tuples(_span, _constraint, valid_tuples, current_tuple=[]):
+    # If empty row, convert to empty list consistent with algo
+    if(_constraint == [0]):
+        _constraint = []
+
     span = _span
     constraint = list(_constraint)
-    #print(_span)
-    #print(current_tuple)
 
     if(span == 0):
         if(len(constraint) == 0):

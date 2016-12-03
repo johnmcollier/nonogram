@@ -82,6 +82,8 @@ def getProblem(problem_num):
         return getProblem39()
     if(problem_num == 40):
         return getProblem40()
+    if(problem_num == 41):
+        return getProblem41()
 
     print("Invalid problem number provided in getProblem() !!!!!")
 
@@ -2932,5 +2934,26 @@ def getProblem40():
     [1,2,1,1],
     [1,3,1,1],
     [2,7]
+    ]
+    return row, col
+
+def getProblem41():
+    row = [
+        [0],
+        [4,1],
+        [1,5],
+        [4,1],
+        [0]
+    ]
+    col = [
+        [0],
+        [1],
+        [1,1],
+        [3],
+        [3],
+        [3],
+        [1],
+        [3],
+        [0]
     ]
     return row, col

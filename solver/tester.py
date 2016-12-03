@@ -9,7 +9,7 @@ import nonogram_csp
 import argparse
 from problems import *
 
-NUM_TESTS = 41
+NUM_TESTS = 42
 PROBLEM = -1
 DRAW = False
 

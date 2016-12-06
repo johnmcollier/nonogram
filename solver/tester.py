@@ -159,8 +159,8 @@ def parse_args():
     parser.add_argument('--draw', dest='draw', action='store_true', help='draw solution')
     parser.add_argument('--model', choices=['model1'], default='model1', help='select model')
     parser.add_argument('--propagator', choices=['bt', 'fc', 'gac'], default='gac', help='select propagator')
-    parser.add_argument('--var_ordering', choices=['random', 'mrv', 'dh', 'custom'], default='mrv', help='select propagator')
-    parser.add_argument('--val_ordering', choices=['arbitrary', 'lcv'], default='lcv', help='select propagator')
+    parser.add_argument('--var_ordering', choices=['random', 'mrv', 'dh', 'custom'], default='mrv', help='select variable ordering heuristic')
+    parser.add_argument('--val_ordering', choices=['arbitrary', 'lcv'], default='lcv', help='select value ordering heuristic')
     parser.set_defaults(draw=False)
 
     args = parser.parse_args()

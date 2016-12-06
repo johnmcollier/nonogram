@@ -13,6 +13,11 @@ NUM_TESTS = 42
 PROBLEM = -1
 DRAW = False
 
+MODEL = nonogram_csp.nonogram_csp_model
+PROPAGATOR = prop_GAC
+VARIABLE_ORDERING = orderings.ord_mrv
+VALUE_ORDERING = orderings.val_lcv
+
 def main():
     global NUM_TESTS
     global PROBLEM
@@ -24,7 +29,7 @@ def main():
     if (PROBLEM == -1):
         for test_id in range(NUM_TESTS):
             print("--- Running Test " +str(test_id)+ " ---")
-            succ, time_taken = run_test(test_id, nonogram_csp.nonogram_csp_model, orderings.val_lcv, orderings.ord_dh)
+            succ, time_taken = run_test(test_id)
             total_time += time_taken
             
             succ_str = "Failed"
@@ -36,7 +41,7 @@ def main():
     else:
         test_id = PROBLEM
         print("--- Running Test " +str(test_id)+ " ---")
-        succ, time_taken = run_test(test_id, nonogram_csp.nonogram_csp_model, orderings.val_lcv, orderings.ord_dh)
+        succ, time_taken = run_test(test_id)
         total_time += time_taken
         
         succ_str = "Failed"
@@ -46,7 +51,12 @@ def main():
         print("Test " + str(test_id) + " " + succ_str + " after " + str(time_taken) + " seconds")
 
 
-def run_test(test_id, model, value_ordering, variable_ordering):
+def run_test(test_id):
+    global MODEL
+    global PROPAGATOR
+    global VARIABLE_ORDERING
+    global VALUE_ORDERING
+
     global DRAW
 
     row, col = getProblem(test_id)
@@ -54,9 +64,9 @@ def run_test(test_id, model, value_ordering, variable_ordering):
     start = time.time()
     succ = False
     
-    csp, var_array = model(row, col)
+    csp, var_array = MODEL(row, col)
     solver = BT(csp)
-    succ = solver.bt_search(prop_BT, variable_ordering, value_ordering)
+    succ = solver.bt_search(PROPAGATOR, VARIABLE_ORDERING, VALUE_ORDERING)
 
     time_taken = (time.time() - start)
 
@@ -113,8 +123,12 @@ def draw_solution(variable_array):
     num_row = len(variable_array)
     num_col = len(variable_array[0])
 
+    print("")
+    
     for row in range(0,num_row):
         draw_row([variable_array[row][i] for i in range(0, num_col)])
+    
+    print("")
 
 def draw_row(row):
     num_vars = len(row)
@@ -133,18 +147,58 @@ def draw_row(row):
     print(drawing)
 
 def parse_args():
+    global MODEL
+    global PROPAGATOR
+    global VARIABLE_ORDERING
+    global VALUE_ORDERING
     global PROBLEM
     global DRAW
 
     parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('--problem_num', type=int, help='problem number to solve')
+    parser.add_argument('--problem', type=int, help='problem number to solve')
     parser.add_argument('--draw', dest='draw', action='store_true', help='draw solution')
+    parser.add_argument('--model', choices=['model1'], default='model1', help='select model')
+    parser.add_argument('--propagator', choices=['bt', 'fc', 'gac'], default='gac', help='select propagator')
+    parser.add_argument('--var_ordering', choices=['random', 'mrv', 'dh', 'custom'], default='mrv', help='select propagator')
+    parser.add_argument('--val_ordering', choices=['arbitrary', 'lcv'], default='lcv', help='select propagator')
     parser.set_defaults(draw=False)
 
     args = parser.parse_args()
-    if args.problem_num is not None:
-        PROBLEM = args.problem_num
+
+    if args.problem is not None:
+        PROBLEM = args.problem
+    
     DRAW = args.draw
+
+    model = args.model
+    if(model == 'model1'):
+        MODEL = nonogram_csp.nonogram_csp_model
+
+    propagator = args.propagator
+    if(propagator == 'bt'):
+        PROPAGATOR = prop_BT
+    elif(propagator == 'fc'):
+        PROPAGATOR = prop_FC
+    elif(propagator == 'gac'):
+        PROPAGATOR = prop_GAC
+
+    var_ordering = args.var_ordering
+    if(var_ordering == 'random'):
+        VARIABLE_ORDERING = orderings.ord_random
+    elif(var_ordering == 'mrv'):
+        VARIABLE_ORDERING = orderings.ord_mrv
+    elif(var_ordering == 'dh'):
+        VARIABLE_ORDERING = orderings.ord_dh
+    elif(var_ordering == 'custom'):
+        VARIABLE_ORDERING = orderings.ord_custom
+
+    val_ordering = args.val_ordering
+    if(val_ordering == 'arbitrary'):
+        VALUE_ORDERING = orderings.val_arbitrary
+    elif(val_ordering == 'lcv'):
+        VALUE_ORDERING = orderings.val_lcv
+
+    
         
 if __name__=="__main__":
     main()
